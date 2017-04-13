@@ -1,24 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="text-center" style="color: white;">My Thoughts</h1>
+<h1 class="text-center" style="color: #fff;">My Thoughts</h1>
 
-<div class="container-fluid" style="padding-right: 15%; padding-left: 15%;">
-  
+<div class="row" style="padding-right: 15%; padding-left: 15%;">
+  <% @posts.each do |post| %>
+    <div class="box">
+      <hr style="margin-bottom: 1%;"><h3 class="intro-text text-center" style="margin: 0%;"><%= post.title %></h3><br> 
+      <h5 class="intro-text text-center" style="margin: 0%;">by <%= post.author %></h5><hr style="margin-top: 1%;">
+      <div style="padding-right: 5%; padding-left: 5%;">
+        <%= post.entry %> 
+      </div>
+      <br><br>
+      <div class="btn-group">
+        <%= link_to 'Show', post, class: "btn btn-default" %>
+        <%= link_to 'Edit', edit_post_path(post), class: "btn btn-default" %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+      </div>
+    </div>
+  <% end %>
 </div>
 
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.author %></td>
-        <td><%= post.entry %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div style="margin-bottom: 5%">
+  <%= link_to 'New Post', new_post_path, class: "btn btn-default" %>
+</div>
 
-<br>
-
-<%= link_to 'New Post', new_post_path %>
